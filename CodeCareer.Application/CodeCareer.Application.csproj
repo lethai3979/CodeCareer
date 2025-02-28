@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CodeCareer.Domain\CodeCareer.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Appliers\" />
+    <Folder Include="ApplierDetails\" />
+    <Folder Include="Recruiters\" />
+    <Folder Include="Posts\" />
+  </ItemGroup>
+
 </Project>
