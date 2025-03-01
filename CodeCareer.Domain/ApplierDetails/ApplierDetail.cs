@@ -1,4 +1,5 @@
-﻿using CodeCareer.Primitives;
+﻿using CodeCareer.Posts;
+using CodeCareer.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace CodeCareer.ApplierDetails
 {
     public class ApplierDetail : BaseEntity<ApplierDetailId>
     {
-        public ApplierDetail(ApplierDetailId id, string applierId, string applierName, int postId, string postName)
+        public ApplierDetail(ApplierDetailId id, string applierId, string applierName, PostId postId, string postName)
             : base(id)
         {
             Id = id;
@@ -21,7 +22,7 @@ namespace CodeCareer.ApplierDetails
 
         public string ApplierId { get; private set; }
         public string ApplierName { get; private set; }
-        public int PostId { get; private set; }
+        public PostId PostId { get; private set; }
         public string PostName { get; private set; }
 
         public bool IsApplied { get; private set; }

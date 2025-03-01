@@ -1,0 +1,6 @@
+@CodeCareer.API_HostAddress = http://localhost:5242
+
+GET {{CodeCareer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

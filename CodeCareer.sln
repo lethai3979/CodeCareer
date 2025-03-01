@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E986740B-D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A5B2AB2F-1003-4F98-AC74-C0B4CC23B0AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCareer.PostgreSQL", "CodeCareer.PostgreSQL\CodeCareer.PostgreSQL.csproj", "{FA52339B-DA88-4141-8E32-E92ED2DABB34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCareer.API", "CodeCareer.API\CodeCareer.API.csproj", "{872E45CE-5633-4086-8866-834362FC21A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{B218F534-CEA1-4E2E-A544-0DF517347272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B218F534-CEA1-4E2E-A544-0DF517347272}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B218F534-CEA1-4E2E-A544-0DF517347272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA52339B-DA88-4141-8E32-E92ED2DABB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA52339B-DA88-4141-8E32-E92ED2DABB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA52339B-DA88-4141-8E32-E92ED2DABB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA52339B-DA88-4141-8E32-E92ED2DABB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872E45CE-5633-4086-8866-834362FC21A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872E45CE-5633-4086-8866-834362FC21A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872E45CE-5633-4086-8866-834362FC21A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872E45CE-5633-4086-8866-834362FC21A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{58A2703A-90E7-42F1-8B4C-AB1DEDD52512} = {E986740B-D547-4AC3-868A-BC6FBBA912CD}
 		{B218F534-CEA1-4E2E-A544-0DF517347272} = {E986740B-D547-4AC3-868A-BC6FBBA912CD}
+		{FA52339B-DA88-4141-8E32-E92ED2DABB34} = {A5B2AB2F-1003-4F98-AC74-C0B4CC23B0AA}
+		{872E45CE-5633-4086-8866-834362FC21A1} = {A5B2AB2F-1003-4F98-AC74-C0B4CC23B0AA}
 	EndGlobalSection
 EndGlobal

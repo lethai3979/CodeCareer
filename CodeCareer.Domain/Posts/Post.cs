@@ -15,7 +15,6 @@ namespace CodeCareer.Posts
             string title,
             string description,
             string recruiterId,
-            Recruiter recruiter,
             DateTime publishDate,
             DateTime expireDate,
             bool isDeleted) : base(id)
@@ -24,7 +23,6 @@ namespace CodeCareer.Posts
             Title = title;
             Description = description;
             RecruiterId = recruiterId;
-            Recruiter = recruiter;
             PublishDate = publishDate;
             ExpireDate = expireDate;
             IsDeleted = isDeleted;
