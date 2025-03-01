@@ -12,13 +12,13 @@
 
   <ItemGroup>
     <Folder Include="ApplierDetails\" />
-    <Folder Include="Recruiters\" />
-    <Folder Include="Posts\" />
+    <Folder Include="Appliers\" />
+    <Folder Include="Posts\Queries\" />
+    <Folder Include="Recruiters\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
 </Project>

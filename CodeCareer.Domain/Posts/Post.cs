@@ -15,22 +15,24 @@ namespace CodeCareer.Posts
             string title,
             string description,
             string recruiterId,
+           
             DateTime publishDate,
-            DateTime expireDate,
-            bool isDeleted) : base(id)
+            DateTime expireDate
+            ) : base(id)
         {
             Id = id;
             Title = title;
             Description = description;
             RecruiterId = recruiterId;
+           
             PublishDate = publishDate;
             ExpireDate = expireDate;
-            IsDeleted = isDeleted;
+           
         }
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string RecruiterId { get; private set; }
-        public Recruiter Recruiter { get; private set; }
+        public Recruiter Recruiter { get; private set; } = null!;
         public DateTime PublishDate { get; private set; }
         public DateTime ExpireDate{ get; private set; }
         public bool IsDeleted { get; private set; }
