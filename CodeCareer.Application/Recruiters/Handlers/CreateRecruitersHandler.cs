@@ -27,7 +27,6 @@ namespace CodeCareer.Application.Recruiters.Handlers
         {
             var recruiters = new Recruiter(request.Name, request.Email);
             await _unitOfWork.UserRepository.Create(recruiters, request.Password);
-
         }
     }
 }
