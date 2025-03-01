@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Domain.Interfaces
 {
-    public interface IPostDetailRepository
+    public interface IApplierDetailRepository
     {
     }
 }

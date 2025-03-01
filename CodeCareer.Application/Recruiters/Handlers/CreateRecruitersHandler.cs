@@ -25,8 +25,10 @@ namespace CodeCareer.Application.Recruiters.Handlers
 
         public async Task Handle(CreateRecruitersCommand request, CancellationToken cancellationToken)
         {
-            var recruiters = new Recruiter(request.Name, request.Email);
-            await _unitOfWork.UserRepository.Create(recruiters, request.Password);
+            var recruiter = new Recruiter(request.Name, request.Email);
+            recruiter.UserName = request.Email;
+            recruiter.Email = request.Email;
+            var result = await _unitOfWork.UserRepository.Create(recruiter, request.Password);
         }
     }
 }

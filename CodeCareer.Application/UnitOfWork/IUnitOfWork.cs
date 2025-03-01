@@ -11,7 +11,7 @@ namespace CodeCareer.Application.UnitOfWork
     {
         IUserRepository UserRepository { get; }
         IPostRepository PostRepository { get; }
-        IPostDetailRepository PostDetailRepository { get; }
+        IApplierDetailRepository PostDetailRepository { get; }
         Task SaveChangeAsync();
     }
 }

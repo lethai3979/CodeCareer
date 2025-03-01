@@ -11,7 +11,7 @@ namespace CodeCareer.Recruiters
 {
     public class Recruiter : IdentityUser
     {
-        public Recruiter( string address, string description)
+        public Recruiter(string address, string description)
         {
             Address = address;
             Description = description;
