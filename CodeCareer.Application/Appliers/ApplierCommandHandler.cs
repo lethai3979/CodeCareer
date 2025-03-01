@@ -10,7 +10,7 @@ namespace CodeCareer.Application.Appliers
 {
     internal class ApplierCommandHandler : ICommandHandler<ApplierCommand>
     {
-        public Task<Unit> Handle(ApplierCommand request, CancellationToken cancellationToken)
+        public Task Handle(ApplierCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

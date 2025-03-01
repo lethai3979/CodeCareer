@@ -14,8 +14,7 @@ namespace CodeCareer.Posts
         public Post(PostId id,
             string title,
             string description,
-            string recruiterId,
-           
+            string recruiterId,    
             DateTime publishDate,
             DateTime expireDate
             ) : base(id)
@@ -23,8 +22,7 @@ namespace CodeCareer.Posts
             Id = id;
             Title = title;
             Description = description;
-            RecruiterId = recruiterId;
-           
+            RecruiterId = recruiterId;           
             PublishDate = publishDate;
             ExpireDate = expireDate;
            
