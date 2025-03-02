@@ -36,10 +36,13 @@ namespace CodeCareer.Posts
         public bool IsDeleted { get; private set; }
         public List<ApplierDetail> ApplierDetails { get; private set; } = new List<ApplierDetail>();
 
-        public void Update(string title, string description, DateTime publishDate, DateTime expireDate)
+        public void Update(string title, string? description, DateTime publishDate, DateTime expireDate)
         {
             Title = title;
-            Description = description;
+            if(description != null)
+            {
+                Description = description;
+            }    
             PublishDate = publishDate;
             ExpireDate = expireDate;
         }

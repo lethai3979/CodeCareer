@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace CodeCareer.Application.Posts.Handlers
 {
 
-    public class DeletePostHander : IRequestHandler<DeletePostCommand, Result>
+    public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DeletePostHander(IUnitOfWork unitOfWork)
+        public DeletePostCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

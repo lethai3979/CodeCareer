@@ -47,7 +47,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        await ApplicationSeedData.SeedDataAsync(services);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Seeding error: {ex.Message}");
+    }
+}
+    app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

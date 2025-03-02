@@ -28,7 +28,7 @@ namespace CodeCareer.PostgreSQL
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
-                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 5;
             })

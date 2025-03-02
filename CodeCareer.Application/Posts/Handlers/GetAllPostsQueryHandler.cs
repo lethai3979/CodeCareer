@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Handlers
 {
-    public class GetPostsHandler : IRequestHandler<GetPostQuery, IEnumerable<Post>>
+    public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostQuery, IEnumerable<Post>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public GetPostsHandler(IUnitOfWork unitOfWork)
+        public GetAllPostsQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Post>> Handle(GetPostQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Post>> Handle(GetAllPostQuery request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.PostRepository.GetAll();
         }

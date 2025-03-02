@@ -10,5 +10,12 @@ using System.Windows.Input;
 
 namespace CodeCareer.Application.Posts.Commands
 {
-    public record UpdatePostCommand(PostId PostId, string title, string description,DateTime PublishDate,DateTime ExpireDate):ICommand<Result>;
+    public record UpdatePostCommand : ICommand<Result>
+    {
+        public required PostId PostId { get; set; } 
+        public required string Title { get; set; }
+        public string? Description { get; set; }
+        public required DateTime PublishDate { get; set; }
+        public required DateTime ExpireDate { get; set; }
+    }
 }

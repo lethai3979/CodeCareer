@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Handlers
 {
-    public class UpdatePostHandler : IRequestHandler<UpdatePostCommand, Result>
+    public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UpdatePostHandler(IUnitOfWork unitOfWork)
+        public UpdatePostCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -28,19 +28,13 @@ namespace CodeCareer.Application.Posts.Handlers
             {
                 return Result.FailureResult(Error.BadRequest("Publish date must be before Expire date."));
             }
-            if (request.PublishDate >= request.ExpireDate)
-            {
-                return Result.FailureResult(Error.BadRequest("Publish date must be before Expire date."));
-            }
 
             try
             {
 
-                post.Update(request.title, request.description, request.PublishDate, request.ExpireDate);
-
+                post.Update(request.Title, request.Description, request.PublishDate, request.ExpireDate);
                 _unitOfWork.PostRepository.Update(post);
                 await _unitOfWork.SaveChangeAsync();
-
                 return Result.SuccessResult();
             }
             catch (Exception ex)

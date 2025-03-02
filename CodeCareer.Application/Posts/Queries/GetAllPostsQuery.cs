@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Queries
 {
-   public record GetPostQuery() : IRequest<IEnumerable<Post>>;
+   public sealed record GetAllPostQuery : IRequest<IEnumerable<Post>>;
 }

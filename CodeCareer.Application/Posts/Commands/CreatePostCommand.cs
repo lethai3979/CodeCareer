@@ -9,5 +9,12 @@ using System.Threading.Tasks;
 namespace CodeCareer.Application.Posts.Commands
 {
 
-    public sealed record CreatePostCommands(string title,string description, string RecruiterId,DateTime publishDate,DateTime expireDate) : ICommand<Result>;
+    public sealed record CreatePostCommand : ICommand<Result>
+    {
+        public required string Title { get; set; } 
+        public required string Description { get; set; }
+        public required string RecruiterId { get; set; }
+        public required DateTime PublishDate { get; set; }
+        public required DateTime ExpireDate { get; set; }
+    }
 }
