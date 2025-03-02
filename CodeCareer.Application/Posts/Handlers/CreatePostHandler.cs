@@ -3,7 +3,6 @@ using CodeCareer.Application.UnitOfWork;
 using CodeCareer.Domain.Shared;
 using CodeCareer.Posts;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,15 +26,12 @@ namespace CodeCareer.Application.Posts.Handlers
                 var lengthPost = await _unitOfWork.PostRepository.GetAll();
                 var post = new Post(new PostId(lengthPost.Count + 1), request.title, request.RecruiterId, request.description, request.publishDate, request.expireDate);
                 await _unitOfWork.PostRepository.Add(post);
+                await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();
             }
-            catch (DbUpdateException dbEx)
+            catch (Exception e)
             {
-               return Result.FailureResult(Error.BadRequest(dbEx.Message));
-            }
-            catch (Exception ex)
-            {
-                return Result.FailureResult(Error.OperationFailed(ex.Message));
+                throw new Exception(e.Message);
             }
         }
     }
