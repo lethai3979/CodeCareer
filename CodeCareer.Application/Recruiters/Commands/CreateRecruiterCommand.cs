@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Recruiters.Commands
 {
-    public record CreateRecruitersCommand(string Name, string Email, string Password) : ICommand<Result>;  
+    public record CreateRecruiterCommand(string Name, string Email, string Password) : ICommand<Result>;  
 }

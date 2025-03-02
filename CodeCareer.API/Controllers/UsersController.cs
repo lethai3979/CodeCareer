@@ -19,7 +19,7 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult> Register([FromBody] CreateRecruitersCommand command)
+        public async Task<ActionResult> Register([FromBody] CreateRecruiterCommand command)
         {
             await _mediator.Send(command);
             return Ok();
