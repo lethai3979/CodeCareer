@@ -29,9 +29,10 @@ namespace CodeCareer.PostgreSQL.Authentication
                 new Claim(JwtRegisteredClaimNames.Email, user.Email!),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id)
             };
-/*            foreach (var role in UserRoles) {
+            foreach (var role in UserRoles)
+            {
                 authClaims.Add(new Claim("role", role));
-            }*/
+            }
 
             var signingCredencials = new SigningCredentials
             (
