@@ -43,5 +43,9 @@ namespace CodeCareer.Posts
             PublishDate = publishDate;
             ExpireDate = expireDate;
         }
+        public void Remove()
+        {
+            IsDeleted = true;
+        }
     }
 }

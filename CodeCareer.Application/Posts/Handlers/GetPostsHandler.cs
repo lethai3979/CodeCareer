@@ -1,5 +1,6 @@
 ﻿using CodeCareer.Application.Posts.Queries;
 using CodeCareer.Application.UnitOfWork;
+using CodeCareer.Domain.Shared;
 using CodeCareer.Posts;
 using MediatR;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Handlers
 {
-    public class GetPostsHandler : IRequestHandler<GetPostQuery, IEnumerable<Post>>
+    public class GetPostsHandler : IRequestHandler<GetPostQuery, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
         public GetPostsHandler(IUnitOfWork unitOfWork)
@@ -18,9 +19,10 @@ namespace CodeCareer.Application.Posts.Handlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Post>> Handle(GetPostQuery request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(GetPostQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.PostRepository.GetAll();
+            var posts =  await _unitOfWork.PostRepository.GetAll();
+            return Result<List<Post>>.SuccessResult(posts);
         }
     }
 }

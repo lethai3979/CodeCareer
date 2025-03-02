@@ -1,5 +1,6 @@
 ﻿using CodeCareer.Domain.Interfaces;
 using CodeCareer.Posts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,38 @@ namespace CodeCareer.PostgreSQL.Repository
 {
     internal class PostRepository : IPostRepository
     {
-        public Task Add(Post entity)
+        private readonly ApplicationDbContext _context;
+        public PostRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task Add(Post entity)
+        {
+            await _context.Posts.AddAsync(entity);
         }
 
         public void Delete(Post entity)
         {
-            throw new NotImplementedException();
+
+            _context.Posts.Remove(entity);
         }
 
-        public Task<List<Post>> GetAll()
+        public async Task<List<Post>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Posts.Where(p => !p.IsDeleted).ToListAsync();
         }
 
-        public Task<Post?> GetById(PostId id)
+        public async Task<Post?> GetById(PostId id)
         {
-            throw new NotImplementedException();
+            return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
         }
 
         public void Update(Post entity)
         {
-            throw new NotImplementedException();
+            _context.Posts.Update(entity);
+
         }
+
     }
 }
