@@ -35,5 +35,13 @@ namespace CodeCareer.Posts
         public DateTime ExpireDate{ get; private set; }
         public bool IsDeleted { get; private set; }
         public List<ApplierDetail> ApplierDetails { get; private set; } = new List<ApplierDetail>();
+
+        public void Update(string title, string description, DateTime publishDate, DateTime expireDate)
+        {
+            Title = title;
+            Description = description;
+            PublishDate = publishDate;
+            ExpireDate = expireDate;
+        }
     }
 }

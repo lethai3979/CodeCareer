@@ -15,5 +15,6 @@ namespace CodeCareer.Domain.Interfaces
         Task Add(Post entity);
         void Update(Post entity);
         void Delete(Post entity);
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using CodeCareer.Domain.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,5 @@ namespace CodeCareer.Application.Posts.Commands
     //        Recruiter recruiter,
     //        DateTime publishDate,
     //        DateTime expireDate,
-    public sealed record CreatePostCommands(String title,String description, String RecruiterId,DateTime publishDate,DateTime expireDate):ICommand;
+    public sealed record CreatePostCommands(string title, string description, string RecruiterId,DateTime publishDate,DateTime expireDate):ICommand<Result>;
 }
