@@ -1,4 +1,5 @@
-﻿using CodeCareer.Posts;
+﻿using CodeCareer.Domain.Shared;
+using CodeCareer.Posts;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Queries
 {
-   public sealed record GetAllPostQuery : IRequest<IEnumerable<Post>>;
+   public sealed record GetAllPostQuery : IRequest<Result>;
 }
