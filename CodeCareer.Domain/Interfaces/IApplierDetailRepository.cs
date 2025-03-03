@@ -12,8 +12,8 @@ namespace CodeCareer.Domain.Interfaces
     {
         Task<List<ApplierDetail>> GetAll();
         Task Add(ApplierDetail applierDetail);
-        Task Delete(ApplierDetail applierDetail);
-        Task<ApplierDetail> GetByUserId(string id);
-        Task<ApplierDetail> GetByPostId(Post id);
+        void Delete(ApplierDetail applierDetail);
+        Task<ApplierDetail?> GetByUserId(string id);
+        Task<ApplierDetail?> GetByPostId(PostId id);
     }
 }

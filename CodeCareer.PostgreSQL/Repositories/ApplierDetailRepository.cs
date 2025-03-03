@@ -1,6 +1,7 @@
 ﻿using CodeCareer.ApplierDetails;
 using CodeCareer.Domain.Interfaces;
 using CodeCareer.Posts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,29 +12,36 @@ namespace CodeCareer.PostgreSQL.Repository
 {
     public class ApplierDetailRepository : IApplierDetailRepository
     {
-        public Task Add(ApplierDetail applierDetail)
+        private readonly ApplicationDbContext _context;
+
+        public ApplierDetailRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task Delete(ApplierDetail applierDetail)
+        public async Task Add(ApplierDetail applierDetail)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(applierDetail);
+        }
+
+        public void Delete(ApplierDetail applierDetail)
+        {
+            _context.Remove(applierDetail);
         }
 
         public Task<List<ApplierDetail>> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.ApplierDetails.ToListAsync();
         }
 
-        public Task<ApplierDetail> GetByPostId(Post id)
+        public Task<ApplierDetail?> GetByPostId(PostId id)
         {
-            throw new NotImplementedException();
+            return _context.ApplierDetails.FirstOrDefaultAsync(a => a.PostId == id);
         }
 
-        public Task<ApplierDetail> GetByUserId(string id)
+        public Task<ApplierDetail?> GetByUserId(string id)
         {
-            throw new NotImplementedException();
+            return _context.ApplierDetails.FirstOrDefaultAsync(a => a.ApplierId == id);
         }
     }
 }

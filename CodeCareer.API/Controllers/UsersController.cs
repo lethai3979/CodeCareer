@@ -1,4 +1,5 @@
-﻿using CodeCareer.Application.User.Login;
+﻿using CodeCareer.API.Extensions;
+using CodeCareer.Application.User.Login;
 using CodeCareer.Application.User.Recruiters.Commands;
 using CodeCareer.Domain.Shared;
 using MediatR;
@@ -18,19 +19,19 @@ namespace CodeCareer.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("RecruiterRegister")]
-        public async Task<ActionResult> RecruiterRegister([FromBody] CreateRecruiterCommand command)
+        [HttpPost("/RecruiterRegister")]
+        public async Task<IResult> RecruiterRegister([FromBody] CreateRecruiterCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return result.Success ? Results.Ok() : result.ToProblemDetails();
         }
 
 
         [HttpPost("Login")]
-        public async Task<ActionResult<Result>> Login(LoginCommand command)
+        public async Task<IResult> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
-            return result;
+            return result.Success ? Results.Ok() : result.ToProblemDetails();
 
         }
     }
