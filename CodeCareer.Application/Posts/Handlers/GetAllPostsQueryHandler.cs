@@ -1,4 +1,5 @@
-﻿using CodeCareer.Application.Posts.Queries;
+﻿using Application.Abstraction.Queries;
+using CodeCareer.Application.Posts.Queries;
 using CodeCareer.Application.UnitOfWork;
 using CodeCareer.Domain.Shared;
 using CodeCareer.Posts;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Handlers
 {
-    public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostQuery, Result>
+    public class GetAllPostsQueryHandler : IQueryHandler<GetAllPostQuery, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
         public GetAllPostsQueryHandler(IUnitOfWork unitOfWork)

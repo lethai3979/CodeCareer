@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="User\Recruiters\Queries\**" />
+    <EmbeddedResource Remove="User\Recruiters\Queries\**" />
+    <None Remove="User\Recruiters\Queries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CodeCareer.Domain\CodeCareer.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ApplierDetails\" />
-    <Folder Include="User\Recruiters\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
