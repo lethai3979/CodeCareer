@@ -51,11 +51,9 @@ namespace CodeCareer.API.Controllers
         [HttpGet("getbyid/{id}")]
         public async Task<IResult> GetById(string id)
         {
-            // Chỉ cho phép Admin hoặc chính chủ truy vấn thông tin
-                
-            
-                var result = await _mediator.Send(new GetUserByIdQuery(id));
-                return result.Success ? Results.Ok(result) : result.ToProblemDetails();
+            // Chỉ cho phép Admin hoặc chính chủ truy vấn thông tin         
+            var result = await _mediator.Send(new GetUserByIdQuery(id));
+            return result.Success ? Results.Ok(result) : result.ToProblemDetails();
             
 
         }
@@ -64,9 +62,8 @@ namespace CodeCareer.API.Controllers
         public async Task<IResult> GetByEmail(string email)
         {
             // Chỉ Admin có quyền tìm kiếm user bằng email
-
-                var result = await _mediator.Send(new GetUserByEmailQuery(email));
-                return result.Success ? Results.Ok(result) : result.ToProblemDetails();
+            var result = await _mediator.Send(new GetUserByEmailQuery(email));
+            return result.Success ? Results.Ok(result) : result.ToProblemDetails();
 
         }
     }
