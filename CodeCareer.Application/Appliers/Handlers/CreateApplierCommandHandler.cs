@@ -1,41 +1,41 @@
-﻿using CodeCareer.Application.Recruiters.Commands;
+﻿using Application.Abstraction.Commands;
 using CodeCareer.Application.UnitOfWork;
-using CodeCareer.Domain.Interfaces;
+using CodeCareer.Appliers;
 using CodeCareer.Domain.Roles;
 using CodeCareer.Domain.Shared;
 using CodeCareer.Recruiters;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Recruiters.Handlers
+namespace CodeCareer.Application.Appliers.Handlers
 {
-    public class CreateRecruiterCommandHandler : IRequestHandler<CreateRecruiterCommand, Result>
+    internal class CreateApplierCommandHandler : ICommandHandler<CreateApplierCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public  CreateRecruiterCommandHandler(IUnitOfWork unitOfWork)
+        public CreateApplierCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(CreateRecruiterCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(CreateApplierCommand request, CancellationToken cancellationToken)
         {
             var transaction = await _unitOfWork.BeginTransactionAsync();
-            var recruiter = new Recruiter(request.Name, request.Email);
-            recruiter.UserName = request.Email;
-            recruiter.Email = request.Email;
+            var applier = new Applier(request.description ?? string.Empty);
+            applier.Email = request.Email;
+            applier.UserName = request.Name;
             try
             {
-                var addUserResult = await _unitOfWork.UserRepository.Create(recruiter, request.Password);
-                if (!addUserResult.Succeeded)
+                var addApplierResult = await _unitOfWork.UserRepository.Create(applier, request.Password);
+                if (!addApplierResult.Succeeded)
                 {
-                    return Result.FailureResult(Error.BadRequest(string.Join("; ", addUserResult.Errors.Select(e => e.Description))));
+
+                    return Result.FailureResult(Error.BadRequest(string.Join("; ", addApplierResult.Errors.Select(e => e.Description))));
                 }
-                var addRoleToUserResult = await _unitOfWork.UserRepository.SetUserRole(recruiter, Role.Recruiter);
+                var addRoleToUserResult = await _unitOfWork.UserRepository.SetUserRole(applier, Role.Applier);
                 if (!addRoleToUserResult.Succeeded)
                 {
                     await transaction.RollbackAsync();
@@ -44,12 +44,11 @@ namespace CodeCareer.Application.Recruiters.Handlers
                 await transaction.CommitAsync();
                 return Result.SuccessResult();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 await transaction.RollbackAsync();
                 return Result.FailureResult(Error.BadRequest(ex.Message));
             }
-
         }
     }
 }
