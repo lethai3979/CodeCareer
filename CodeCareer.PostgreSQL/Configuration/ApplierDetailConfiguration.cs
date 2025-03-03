@@ -25,15 +25,15 @@ namespace CodeCareer.PostgreSQL.Configuration
                        value => new ApplierDetailId(value));
 
 
-            builder.HasOne<Post>()
-                .WithMany()
-                .HasForeignKey(a => a.PostId)
-                .IsRequired();
+            //builder.HasOne<Post>()
+            //    .WithMany()
+            //    .HasForeignKey(a => a.PostId)
+            //    .IsRequired();
 
-            builder.HasOne<Applier>()
-                .WithMany()
-                .HasForeignKey(a => a.ApplierId)
-                .IsRequired();
+            //builder.HasOne<Applier>()
+            //    .WithMany()
+            //    .HasForeignKey(a => a.ApplierId)
+            //    .IsRequired();
         }
     }
 }
