@@ -34,35 +34,17 @@ namespace CodeCareer.PostgreSQL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ApplierId1")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ApplierName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsApplied")
                         .HasColumnType("boolean");
 
                     b.Property<int>("PostId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PostId1")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PostName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplierId");
 
-                    b.HasIndex("ApplierId1");
-
                     b.HasIndex("PostId");
-
-                    b.HasIndex("PostId1");
 
                     b.ToTable("ApplierDetails");
                 });
@@ -89,10 +71,6 @@ namespace CodeCareer.PostgreSQL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("RecruiterId1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -100,8 +78,6 @@ namespace CodeCareer.PostgreSQL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RecruiterId");
-
-                    b.HasIndex("RecruiterId1");
 
                     b.ToTable("Posts");
                 });
@@ -346,37 +322,23 @@ namespace CodeCareer.PostgreSQL.Migrations
             modelBuilder.Entity("CodeCareer.ApplierDetails.ApplierDetail", b =>
                 {
                     b.HasOne("CodeCareer.Appliers.Applier", null)
-                        .WithMany()
+                        .WithMany("ApplierDetails")
                         .HasForeignKey("ApplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeCareer.Appliers.Applier", null)
-                        .WithMany("ApplierDetails")
-                        .HasForeignKey("ApplierId1");
-
                     b.HasOne("CodeCareer.Posts.Post", null)
-                        .WithMany()
+                        .WithMany("ApplierDetails")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CodeCareer.Posts.Post", null)
-                        .WithMany("ApplierDetails")
-                        .HasForeignKey("PostId1");
                 });
 
             modelBuilder.Entity("CodeCareer.Posts.Post", b =>
                 {
-                    b.HasOne("CodeCareer.Recruiters.Recruiter", null)
-                        .WithMany()
-                        .HasForeignKey("RecruiterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CodeCareer.Recruiters.Recruiter", "Recruiter")
                         .WithMany("Posts")
-                        .HasForeignKey("RecruiterId1")
+                        .HasForeignKey("RecruiterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

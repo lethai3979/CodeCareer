@@ -26,12 +26,12 @@ namespace CodeCareer.PostgreSQL.Configuration
 
 
             builder.HasOne<Post>()
-                .WithMany()
+                .WithMany(p => p.ApplierDetails)
                 .HasForeignKey(a => a.PostId)
                 .IsRequired();
 
             builder.HasOne<Applier>()
-                .WithMany()
+                .WithMany(p => p.ApplierDetails)
                 .HasForeignKey(a => a.ApplierId)
                 .IsRequired();
         }

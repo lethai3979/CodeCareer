@@ -10,20 +10,16 @@ namespace CodeCareer.ApplierDetails
 {
     public class ApplierDetail : BaseEntity<ApplierDetailId>
     {
-        public ApplierDetail(ApplierDetailId id, string applierId, string applierName, PostId postId, string postName)
+        public ApplierDetail(ApplierDetailId id, string applierId, PostId postId)
             : base(id)
         {
             Id = id;
             ApplierId = applierId;
-            ApplierName = applierName;
             PostId = postId;
-            PostName = postName;
         }
 
         public string ApplierId { get; private set; }
-        public string ApplierName { get; private set; }
         public PostId PostId { get; private set; }
-        public string PostName { get; private set; }
 
         public bool IsApplied { get; private set; }
 

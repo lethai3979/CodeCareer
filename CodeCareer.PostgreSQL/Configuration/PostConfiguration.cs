@@ -21,8 +21,8 @@ namespace CodeCareer.PostgreSQL.Configuration
                        postId => postId.value,
                        value => new PostId(value));
 
-            builder.HasOne<Recruiter>()
-                .WithMany()
+            builder.HasOne(p => p.Recruiter)
+                .WithMany(r => r.Posts)
                 .HasForeignKey(p => p.RecruiterId)
                 .IsRequired();
         }

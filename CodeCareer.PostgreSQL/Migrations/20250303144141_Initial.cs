@@ -169,7 +169,6 @@ namespace CodeCareer.PostgreSQL.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     RecruiterId = table.Column<string>(type: "text", nullable: false),
-                    RecruiterId1 = table.Column<string>(type: "text", nullable: false),
                     PublishDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ExpireDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -183,12 +182,6 @@ namespace CodeCareer.PostgreSQL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_RecruiterId1",
-                        column: x => x.RecruiterId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,13 +190,9 @@ namespace CodeCareer.PostgreSQL.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
                     ApplierId = table.Column<string>(type: "text", nullable: false),
-                    ApplierName = table.Column<string>(type: "text", nullable: false),
                     PostId = table.Column<int>(type: "integer", nullable: false),
-                    PostName = table.Column<string>(type: "text", nullable: false),
                     IsApplied = table.Column<bool>(type: "boolean", nullable: false),
-                    AppliedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ApplierId1 = table.Column<string>(type: "text", nullable: true),
-                    PostId1 = table.Column<int>(type: "integer", nullable: true)
+                    AppliedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,21 +204,11 @@ namespace CodeCareer.PostgreSQL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ApplierDetails_AspNetUsers_ApplierId1",
-                        column: x => x.ApplierId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_ApplierDetails_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ApplierDetails_Posts_PostId1",
-                        column: x => x.PostId1,
-                        principalTable: "Posts",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -238,19 +217,9 @@ namespace CodeCareer.PostgreSQL.Migrations
                 column: "ApplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplierDetails_ApplierId1",
-                table: "ApplierDetails",
-                column: "ApplierId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ApplierDetails_PostId",
                 table: "ApplierDetails",
                 column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ApplierDetails_PostId1",
-                table: "ApplierDetails",
-                column: "PostId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -293,11 +262,6 @@ namespace CodeCareer.PostgreSQL.Migrations
                 name: "IX_Posts_RecruiterId",
                 table: "Posts",
                 column: "RecruiterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_RecruiterId1",
-                table: "Posts",
-                column: "RecruiterId1");
         }
 
         /// <inheritdoc />

@@ -17,7 +17,7 @@ namespace CodeCareer.PostgreSQL.UnitOfWorks
 
         public IPostRepository PostRepository { get; }
 
-        public IApplierDetailRepository PostDetailRepository { get; }
+        public IApplierDetailRepository ApplierDetailRepository { get; }
 
         public UnitOfWork(ApplicationDbContext context, 
                         IUserRepository userRepository, 
@@ -27,7 +27,7 @@ namespace CodeCareer.PostgreSQL.UnitOfWorks
             _context = context;
             UserRepository = userRepository;
             PostRepository = postRepository;
-            PostDetailRepository = postDetailRepository;
+            ApplierDetailRepository = postDetailRepository;
         }
 
         public async Task SaveChangeAsync()

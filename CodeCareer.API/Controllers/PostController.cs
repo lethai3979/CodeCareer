@@ -1,7 +1,9 @@
 ﻿using CodeCareer.API.Extensions;
 using CodeCareer.Application.Posts.Queries;
+using CodeCareer.Domain.Roles;
 using CodeCareer.Domain.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeCareer.API.Controllers
