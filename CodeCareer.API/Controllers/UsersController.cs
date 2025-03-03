@@ -31,6 +31,7 @@ namespace CodeCareer.API.Controllers
         {
             var result = await _mediator.Send(command);
             return result;
+
         }
     }
 }
