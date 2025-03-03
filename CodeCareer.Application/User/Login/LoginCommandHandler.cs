@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Login
+namespace CodeCareer.Application.User.Login
 {
     internal sealed class LoginCommandHandler : ICommandHandler<LoginCommand, Result>
     {
@@ -36,7 +36,7 @@ namespace CodeCareer.Application.Login
             }
             var userRoles = await _unitOfWork.UserRepository.GetAllUserRoles(user);
             var token = _jwtProvider.GenerateToken(user, userRoles);
-            return Result<string>.SuccessResult(token); 
+            return Result<string>.SuccessResult(token);
         }
     }
 }

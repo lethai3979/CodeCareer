@@ -1,5 +1,5 @@
-﻿using CodeCareer.Application.Login;
-using CodeCareer.Application.Recruiters.Commands;
+﻿using CodeCareer.Application.User.Login;
+using CodeCareer.Application.User.Recruiters.Commands;
 using CodeCareer.Domain.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Http;

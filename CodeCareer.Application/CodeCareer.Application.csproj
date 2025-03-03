@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <Folder Include="ApplierDetails\" />
-    <Folder Include="Recruiters\Queries\" />
+    <Folder Include="User\Recruiters\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

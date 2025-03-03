@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Login
+namespace CodeCareer.Application.User.Login
 {
     public sealed record LoginCommand : ICommand<Result>
     {
         public required string Email { get; set; }
-        public required string Password { get; set; }    
+        public required string Password { get; set; }
     }
 }

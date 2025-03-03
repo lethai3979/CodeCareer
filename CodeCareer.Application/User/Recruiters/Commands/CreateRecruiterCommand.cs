@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace CodeCareer.Application.Recruiters.Commands
+namespace CodeCareer.Application.User.Recruiters.Commands
 {
-    public record CreateRecruiterCommand(string Name, string Email, string Password) : ICommand<Result>;  
+    public record CreateRecruiterCommand(string Name, string Email, string Password) : ICommand<Result>;
 }

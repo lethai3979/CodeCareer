@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Appliers.Commands
+namespace CodeCareer.Application.User.Appliers.Commands
 {
     public sealed record ApplyPostCommand : ICommand<Result>
     {

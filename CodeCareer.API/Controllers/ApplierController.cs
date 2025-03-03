@@ -1,4 +1,4 @@
-﻿using CodeCareer.Application.Appliers;
+﻿using CodeCareer.Application.User.Appliers.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

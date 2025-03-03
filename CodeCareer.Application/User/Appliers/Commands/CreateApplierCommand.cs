@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Appliers
+namespace CodeCareer.Application.User.Appliers.Commands
 {
     public sealed record CreateApplierCommand : ICommand<Result>
     {

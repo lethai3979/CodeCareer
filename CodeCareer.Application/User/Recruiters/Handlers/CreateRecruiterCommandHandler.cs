@@ -1,16 +1,16 @@
-﻿using CodeCareer.Application.Recruiters.Commands;
-using CodeCareer.Application.UnitOfWork;
+﻿using CodeCareer.Application.UnitOfWork;
+using CodeCareer.Application.User.Recruiters.Commands;
 using CodeCareer.Domain.Roles;
 using CodeCareer.Domain.Shared;
 using CodeCareer.Recruiters;
 using MediatR;
 
-namespace CodeCareer.Application.Recruiters.Handlers
+namespace CodeCareer.Application.User.Recruiters.Handlers
 {
     public class CreateRecruiterCommandHandler : IRequestHandler<CreateRecruiterCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public  CreateRecruiterCommandHandler(IUnitOfWork unitOfWork)
+        public CreateRecruiterCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

@@ -11,6 +11,8 @@ using System.Security.Claims;
 
 namespace CodeCareer.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PostController
     {
         private readonly IHttpContextAccessor _contextAccessor;
@@ -25,14 +27,14 @@ namespace CodeCareer.API.Controllers
                      .FindFirstValue(ClaimTypes.NameIdentifier) ?? "UnknownUser";
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IResult> GetAll()
         {
             var request = new GetAllPostQuery();
             var result = await _mediator.Send(request);
             return result.Success ? Results.Ok(result) : result.ToProblemDetails();
         }
-        [HttpPost("create")]
+        [HttpPost("Create")]
         [Authorize(Roles = Role.Recruiter)]
         public async Task<IResult> Create([FromBody] CreatePostCommand command)
         {

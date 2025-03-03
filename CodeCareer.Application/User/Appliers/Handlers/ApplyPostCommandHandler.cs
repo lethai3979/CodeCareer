@@ -1,6 +1,6 @@
 ﻿using Application.Abstraction.Commands;
-using CodeCareer.Application.Appliers.Commands;
 using CodeCareer.Application.UnitOfWork;
+using CodeCareer.Application.User.Appliers.Commands;
 using CodeCareer.ApplierDetails;
 using CodeCareer.Domain.Shared;
 using CodeCareer.Posts;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Appliers.Handlers
+namespace CodeCareer.Application.User.Appliers.Handlers
 {
     public sealed class ApplyPostCommandHandler : ICommandHandler<ApplyPostCommand, Result>
     {
@@ -42,7 +42,7 @@ namespace CodeCareer.Application.Appliers.Handlers
                 await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();
             }
-            catch(DbUpdateException dbEx)
+            catch (DbUpdateException dbEx)
             {
                 return Result.FailureResult(Error.Conflict(dbEx.Message));
             }
