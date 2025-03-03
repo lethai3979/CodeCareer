@@ -18,12 +18,13 @@ namespace CodeCareer.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Register")]
-        public async Task<ActionResult> Register([FromBody] CreateRecruiterCommand command)
+        [HttpPost("RecruiterRegister")]
+        public async Task<ActionResult> RecruiterRegister([FromBody] CreateRecruiterCommand command)
         {
             await _mediator.Send(command);
             return Ok();
         }
+
 
         [HttpPost("Login")]
         public async Task<ActionResult<Result>> Login(LoginCommand command)

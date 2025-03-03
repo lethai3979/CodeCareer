@@ -9,12 +9,12 @@ namespace CodeCareer.Domain.Shared
     public sealed record Error
     {
         public string ErrorMessage { get; set; }
-        public ErrorType ErrorCode { get; }
+        public ErrorType ErrorType { get; }
 
         private Error(string errorMessage, ErrorType errorCode)
         {
             ErrorMessage = errorMessage;
-            ErrorCode = errorCode;
+            ErrorType = errorCode;
         }
 
         public static readonly Error None = new Error(string.Empty, ErrorType.None);
