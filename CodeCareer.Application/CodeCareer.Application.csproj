@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ApplierDetails\**" />
     <Compile Remove="User\Recruiters\Queries\**" />
+    <EmbeddedResource Remove="ApplierDetails\**" />
     <EmbeddedResource Remove="User\Recruiters\Queries\**" />
+    <None Remove="ApplierDetails\**" />
     <None Remove="User\Recruiters\Queries\**" />
   </ItemGroup>
 
@@ -17,10 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApplierDetails\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 

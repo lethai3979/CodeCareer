@@ -11,11 +11,13 @@ namespace CodeCareer.Recruiters
 {
     public class Recruiter : IdentityUser
     {
-        public Recruiter(string address, string description)
+        public Recruiter(string address, string description, string name)
         {
             Address = address;
             Description = description;
+            Name = name;
         }
+        public string Name { get; private set; }
         public string Address { get; private set; }
         public string Description { get; private set; }
 

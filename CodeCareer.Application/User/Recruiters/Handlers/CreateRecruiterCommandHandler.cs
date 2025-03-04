@@ -18,7 +18,11 @@ namespace CodeCareer.Application.User.Recruiters.Handlers
         public async Task<Result> Handle(CreateRecruiterCommand request, CancellationToken cancellationToken)
         {
             var transaction = await _unitOfWork.BeginTransactionAsync();
-            var recruiter = new Recruiter(request.Name, request.Email);
+            if(request.Description == null)
+            {
+                request.Description = string.Empty;
+            }    
+            var recruiter = new Recruiter(request.Address, request.Description, request.Name);
             recruiter.UserName = request.Email;
             recruiter.Email = request.Email;
             try

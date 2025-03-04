@@ -1,6 +1,8 @@
 ﻿using CodeCareer.API.Extensions;
 using CodeCareer.Application.User.Appliers.Commands;
+using CodeCareer.Domain.Roles;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -34,6 +36,7 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpPost("ApplyPost")]
+        [Authorize(Roles = Role.Applier)]
         public async Task<IResult> ApplyPost([FromBody] ApplyPostCommand command)
         {
             command.UserId = _userId;

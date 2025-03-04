@@ -33,10 +33,10 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpPost("RecruiterRegister")]
-        public async Task<ActionResult> RecruiterRegister([FromBody] CreateRecruiterCommand command)
+        public async Task<IResult> RecruiterRegister([FromBody] CreateRecruiterCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return result.Success ? Results.Ok() : result.ToProblemDetails();
         }
 
 
@@ -47,8 +47,9 @@ namespace CodeCareer.API.Controllers
             return result;
 
         }
+
         [Authorize(Roles = Role.Admin)]
-        [HttpGet("getbyid/{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IResult> GetById(string id)
         {
             // Chỉ cho phép Admin hoặc chính chủ truy vấn thông tin         
@@ -57,8 +58,9 @@ namespace CodeCareer.API.Controllers
             
 
         }
+
         [Authorize(Roles = Role.Admin)]
-        [HttpGet("getbyemail/{email}")]
+        [HttpGet("GetByEmail/{email}")]
         public async Task<IResult> GetByEmail(string email)
         {
             // Chỉ Admin có quyền tìm kiếm user bằng email

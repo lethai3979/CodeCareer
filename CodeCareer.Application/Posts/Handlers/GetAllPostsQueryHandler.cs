@@ -1,4 +1,6 @@
 ﻿using Application.Abstraction.Queries;
+using AutoMapper;
+using CodeCareer.Application.DTOs;
 using CodeCareer.Application.Posts.Queries;
 using CodeCareer.Application.UnitOfWork;
 using CodeCareer.Domain.Shared;
@@ -15,15 +17,18 @@ namespace CodeCareer.Application.Posts.Handlers
     public class GetAllPostsQueryHandler : IQueryHandler<GetAllPostQuery, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public GetAllPostsQueryHandler(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public GetAllPostsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<Result> Handle(GetAllPostQuery request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.PostRepository.GetAll();
-            return Result<List<Post>>.SuccessResult(post);
+            var posts = await _unitOfWork.PostRepository.GetAll();
+            var listPostDTOs = _mapper.Map<List<PostDTO>>(posts);
+            return Result<List<PostDTO>>.SuccessResult(listPostDTOs);
         }
     }
 }
