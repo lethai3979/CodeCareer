@@ -25,7 +25,7 @@ namespace CodeCareer.Application.User.Appliers.Handlers
         public async Task<Result> Handle(CreateApplierCommand request, CancellationToken cancellationToken)
         {
             var transaction = await _unitOfWork.BeginTransactionAsync();
-            var applier = new Applier(request.description ?? string.Empty);
+            var applier = new Applier(request.Description ?? string.Empty);
             applier.Email = request.Email;
             applier.UserName = request.Name;
             try

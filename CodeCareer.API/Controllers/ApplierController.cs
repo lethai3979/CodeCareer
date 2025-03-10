@@ -1,4 +1,5 @@
-﻿using CodeCareer.Application.User.Appliers.Commands;
+﻿using CodeCareer.API.Extensions;
+using CodeCareer.Application.User.Appliers.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +16,14 @@ namespace CodeCareer.API.Controllers
             _mediator = mediator;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Regiter([FromBody] CreateApplierCommand command)
+        public async Task<IResult> Regiter([FromBody] CreateApplierCommand command)
         {
             var result = await _mediator.Send(command);
             if (result.Success)
             {
-                return Ok();
+                return Results.Ok();
             }
-            return BadRequest(result.Error);
+            return result.ToProblemDetails();
         }
     }
 }

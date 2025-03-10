@@ -13,6 +13,6 @@ namespace CodeCareer.Application.User.Appliers.Commands
         public required string Name { get; set; }
         public required string Password { get; set; }
         public required string Email { get; set; }
-        public string? description { get; set; }
+        public string? Description { get; set; }
     }
 }

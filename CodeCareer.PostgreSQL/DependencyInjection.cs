@@ -19,13 +19,14 @@ namespace CodeCareer.PostgreSQL
     {
         public static void AddPostgreSQL(this IServiceCollection services, string connectionString) 
         {
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IApplierDetailRepository, ApplierDetailRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IJWTProvider, JWTProvider>();
-
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = true;

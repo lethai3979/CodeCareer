@@ -22,7 +22,10 @@ namespace CodeCareer.Posts
             Id = id;
             Title = title;
             Description = description;
-            RecruiterId = recruiterId;           
+            if(recruiterId != null)
+            {
+                RecruiterId = recruiterId;
+            }       
             PublishDate = publishDate;
             ExpireDate = expireDate;
            

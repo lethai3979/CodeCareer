@@ -34,6 +34,16 @@ namespace CodeCareer.API.Controllers
             var result = await _mediator.Send(request);
             return result.Success ? Results.Ok(result) : result.ToProblemDetails();
         }
+
+        [HttpGet("GetById/{id}")]
+        public async Task<IResult> GetById(int id)
+        {
+            var request = new GetPostByIdQuery(id);
+            var result = await _mediator.Send(request);
+            return result.Success ? Results.Ok(result) : result.ToProblemDetails();
+        }
+
+
         [HttpPost("Create")]
         [Authorize(Roles = Role.Recruiter)]
         public async Task<IResult> Create([FromBody] CreatePostCommand command)
