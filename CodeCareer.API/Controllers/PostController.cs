@@ -60,11 +60,25 @@ namespace CodeCareer.API.Controllers
         [HttpPut("Update/{id}")]
         public async Task<IResult> Update(int id, [FromBody] UpdatePostCommand command)
         {
-            if(command.Id != id)
+            if (command.Id != id)
             {
                 return Results.BadRequest("PostId in the body does not match the PostId in the URL");
             }
             command.RequestUserId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            var results = await _mediator.Send(command);
+            if (results.Success)
+            {
+                return Results.Ok();
+            }
+            return results.ToProblemDetails();
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public async Task<IResult> Delete(int id)
+        {
+            var command = new DeletePostCommand();
+            command.Id = id;
+            command.RequestBy = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
             var results = await _mediator.Send(command);
             if (results.Success)
             {

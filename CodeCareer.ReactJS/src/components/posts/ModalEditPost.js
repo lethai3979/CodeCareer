@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
 import { updatePost } from "../../services/PostService";
 import { toast } from "react-toastify";
 
 function ModalEditPost(props) {
-    const { post, show, handleClose } = props;
-    const [title, setTitle] = useState(`${post.title}`);
-    const [description, setDescription] = useState(`${post.description}`);
-    const [date, setDate] = useState(post.expireDate ? new Date(post.expireDate).toLocaleDateString('en-CA') : ""
-    );
+    const { show, handleClose, post } = props;
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [date, setDate] = useState("");
     const handleEditPost = async () => {
         try {
             const expireDate = new Date(date + "T00:00:00Z").toISOString();
@@ -29,7 +28,14 @@ function ModalEditPost(props) {
 
         }
     };
+    useEffect(() => {
+        if (show) {
+            setTitle(post.title)
+            setDescription(post.description)
+            setDate(post.expireDate ? new Date(post.expireDate).toLocaleDateString('en-CA') : "")
+        }
 
+    }, [post, show])
     return (
         <>
             <Modal show={show} onHide={handleClose}>

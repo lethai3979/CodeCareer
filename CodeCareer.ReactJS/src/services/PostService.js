@@ -15,4 +15,8 @@ function createPost(title, description, expireDate) {
 function updatePost(id, title, description, expireDate) {
     return axios.put(`/Post/Update/${id}`, { id, title, description, expireDate })
 }
-export { getAllPosts, createPost, getPostById, updatePost }
+
+function deletePost(id) {
+    return axios.delete(`/Post/Delete/${id}`)
+}
+export { getAllPosts, createPost, getPostById, updatePost, deletePost }
