@@ -30,7 +30,7 @@ namespace CodeCareer.PostgreSQL.Repository
 
         public async Task<List<Post>> GetAll()
         {
-            return await _context.Posts.Where(p => !p.IsDeleted).ToListAsync();
+            return await _context.Posts.Where(p => !p.IsDeleted).OrderBy(p => p.PublishDate).ToListAsync();
         }
 
         public async Task<Post?> GetById(PostId id)

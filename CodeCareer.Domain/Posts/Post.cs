@@ -14,19 +14,15 @@ namespace CodeCareer.Posts
         public Post(PostId id,
             string title,
             string description,
-            string recruiterId,    
-            DateTime publishDate,
+            string recruiterId,
             DateTime expireDate
             ) : base(id)
         {
             Id = id;
             Title = title;
             Description = description;
-            if(recruiterId != null)
-            {
-                RecruiterId = recruiterId;
-            }       
-            PublishDate = publishDate;
+            RecruiterId = recruiterId;     
+            PublishDate = DateTime.Now;
             ExpireDate = expireDate;
            
         }
@@ -39,14 +35,13 @@ namespace CodeCareer.Posts
         public bool IsDeleted { get; private set; }
         public List<ApplierDetail> ApplierDetails { get; private set; } = new List<ApplierDetail>();
 
-        public void Update(string title, string? description, DateTime publishDate, DateTime expireDate)
+        public void Update(string title, string? description, DateTime expireDate)
         {
             Title = title;
             if(description != null)
             {
                 Description = description;
             }    
-            PublishDate = publishDate;
             ExpireDate = expireDate;
         }
         public void Remove()

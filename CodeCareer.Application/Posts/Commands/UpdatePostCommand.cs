@@ -12,10 +12,10 @@ namespace CodeCareer.Application.Posts.Commands
 {
     public record UpdatePostCommand : ICommand<Result>
     {
-        public required PostId PostId { get; set; } 
+        public int Id { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }
-        public required DateTime PublishDate { get; set; }
         public required DateTime ExpireDate { get; set; }
+        public string? RequestUserId { get; set; }
     }
 }

@@ -12,10 +12,11 @@ namespace CodeCareer.Application.Mapping
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() 
+        public MappingProfile()
         {
             CreateMap<Recruiter, RecruiterDTO>().ReverseMap();
-            CreateMap<Post, PostDTO>().ReverseMap();
+            CreateMap<Post, PostDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.value));
         }
     }
 }

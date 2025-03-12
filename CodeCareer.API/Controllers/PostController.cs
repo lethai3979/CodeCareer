@@ -45,10 +45,10 @@ namespace CodeCareer.API.Controllers
 
 
         [HttpPost("Create")]
-        [Authorize(Roles = Role.Recruiter)]
+        //[Authorize(Roles = Role.Recruiter)]
         public async Task<IResult> Create([FromBody] CreatePostCommand command)
         {
-            command.RecruiterId = _userId;
+            command.RecruiterId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
             var results = await _mediator.Send(command);
             if (results.Success)
             {
@@ -57,5 +57,20 @@ namespace CodeCareer.API.Controllers
             return results.ToProblemDetails();
         }
 
+        [HttpPut("Update/{id}")]
+        public async Task<IResult> Update(int id, [FromBody] UpdatePostCommand command)
+        {
+            if(command.Id != id)
+            {
+                return Results.BadRequest("PostId in the body does not match the PostId in the URL");
+            }
+            command.RequestUserId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            var results = await _mediator.Send(command);
+            if (results.Success)
+            {
+                return Results.Ok();
+            }
+            return results.ToProblemDetails();
+        }
     }
 }

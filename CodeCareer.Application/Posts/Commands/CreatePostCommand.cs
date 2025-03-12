@@ -16,7 +16,6 @@ namespace CodeCareer.Application.Posts.Commands
         public required string Description { get; set; }
         [JsonIgnore]
         public string? RecruiterId { get; set; }
-        public required DateTime PublishDate { get; set; }
         public required DateTime ExpireDate { get; set; }
     }
 }

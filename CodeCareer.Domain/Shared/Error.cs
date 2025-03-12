@@ -24,5 +24,6 @@ namespace CodeCareer.Domain.Shared
         public static Error BadRequest(string message) => new Error(message, ErrorType.BadRequest);
         public static Error OperationFailed(string message) => new Error(message, ErrorType.OperationFailed);
         public static Error Conflict(string message) => new Error(message, ErrorType.Conflict);
+        public static Error Unauthorized(string message) => new Error(message, ErrorType.Unauthorized);
     }
 }

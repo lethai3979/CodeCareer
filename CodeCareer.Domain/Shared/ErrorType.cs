@@ -13,5 +13,6 @@ namespace CodeCareer.Domain.Shared
         BadRequest = 3,
         OperationFailed = 4,
         Conflict = 5,
+        Unauthorized = 6
     }
 }

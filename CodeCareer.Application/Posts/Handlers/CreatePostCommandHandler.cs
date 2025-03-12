@@ -24,7 +24,7 @@ namespace CodeCareer.Application.Posts.Handlers
             try
             {
                 var lengthPost = await _unitOfWork.PostRepository.GetAll();
-                var post = new Post(new PostId(lengthPost.Count + 1), request.Title, request.Description, request.RecruiterId, request.PublishDate, request.ExpireDate);
+                var post = new Post(new PostId(lengthPost.Count + 1), request.Title, request.Description, request.RecruiterId, request.ExpireDate);
                 await _unitOfWork.PostRepository.Add(post);
                 await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();
