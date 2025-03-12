@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Login } from "../services/UserService";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
             const response = await Login({ email, password });
-            console.log("Đăng nhập thành công:", response.data);
+            const token = response.data;
+            sessionStorage.setItem("authToken", token);
+            const decoded = jwtDecode(token);
+            console.log("Thông tin từ token:", decoded);
+
+            alert("Đăng nhập thành công!");
+            navigate("/");
         } catch (error) {
             console.error("Lỗi đăng nhập:", error.response?.data || error.message);
         }
@@ -43,7 +51,7 @@ export default function LoginForm() {
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Đăng nhập
                 </Button>
             </Form>
         </div>

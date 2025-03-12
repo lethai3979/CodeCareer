@@ -17,5 +17,6 @@ namespace CodeCareer.Application.Posts.Commands
         public string? Description { get; set; }
         public required DateTime ExpireDate { get; set; }
         public string? RequestUserId { get; set; }
+
     }
 }

@@ -64,7 +64,7 @@ namespace CodeCareer.API.Controllers
             {
                 return Results.BadRequest("PostId in the body does not match the PostId in the URL");
             }
-            command.RequestUserId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            command.RequestUserId = _userId;//hardcoded for now
             var results = await _mediator.Send(command);
             if (results.Success)
             {

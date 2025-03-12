@@ -16,7 +16,7 @@ function ModalEditPost(props) {
                 id: post.id,
                 title: title,
                 description: description,
-                date: expireDate
+                expireDate: expireDate
             }
             console.log(editPost)
             let res = await updatePost(post.id, title, description, expireDate);

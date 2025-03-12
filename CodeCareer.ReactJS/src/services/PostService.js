@@ -13,6 +13,15 @@ function createPost(title, description, expireDate) {
 }
 
 function updatePost(id, title, description, expireDate) {
-    return axios.put(`/Post/Update/${id}`, { id, title, description, expireDate })
+    return axios.put(`/Post/Update/${id}`,
+        { id, title, description, expireDate },
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            }
+        }
+    );
 }
+
 export { getAllPosts, createPost, getPostById, updatePost }
