@@ -45,10 +45,10 @@ namespace CodeCareer.API.Controllers
 
 
         [HttpPost("Create")]
-        //[Authorize(Roles = Role.Recruiter)]
+        [Authorize(Roles = Role.Recruiter)]
         public async Task<IResult> Create([FromBody] CreatePostCommand command)
         {
-            command.RecruiterId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            command.RecruiterId = _userId;
             var results = await _mediator.Send(command);
             if (results.Success)
             {
@@ -58,13 +58,14 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpPut("Update/{id}")]
+        [Authorize(Roles = Role.Recruiter)]
         public async Task<IResult> Update(int id, [FromBody] UpdatePostCommand command)
         {
             if (command.Id != id)
             {
                 return Results.BadRequest("PostId in the body does not match the PostId in the URL");
             }
-            command.RequestUserId = _userId;//hardcoded for now
+            command.RequestUserId = _userId;
             var results = await _mediator.Send(command);
             if (results.Success)
             {
@@ -74,11 +75,12 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpDelete("Delete/{id}")]
+        [Authorize(Roles = Role.Recruiter)]
         public async Task<IResult> Delete(int id)
         {
             var command = new DeletePostCommand();
             command.Id = id;
-            command.RequestBy = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            command.RequestBy = _userId;
             var results = await _mediator.Send(command);
             if (results.Success)
             {
