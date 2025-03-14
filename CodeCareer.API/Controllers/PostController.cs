@@ -55,7 +55,7 @@ namespace CodeCareer.API.Controllers
 
         [HttpPost("Create")]
         [Authorize(Roles = Role.Recruiter)]
-        public async Task<IResult> Create([FromBody] CreatePostCommand command)
+        public async Task<IResult> Create([FromForm] CreatePostCommand command)
         {
             command.RecruiterId = _userId;
             var results = await _mediator.Send(command);

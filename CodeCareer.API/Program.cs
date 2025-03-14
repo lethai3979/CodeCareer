@@ -1,7 +1,9 @@
+﻿using CloudinaryDotNet;
 using CodeCareer.API.Authentication;
 using CodeCareer.Application;
 using CodeCareer.PostgreSQL;
 using CodeCareer.PostgreSQL.Authentication;
+using CodeCareer.PostgreSQL.File;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,6 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 var postgreConnection = builder.Configuration
                         .GetConnectionString("PostgreSQL")
                         ?? throw new InvalidOperationException("Connection String not found");
+builder.Services.Configure<CloudinarySetting>(
+    builder.Configuration.GetSection("Cloudinary"));
+
+// Đăng ký Cloudinary service
+var cloudinarySettings = builder.Configuration.GetSection("Cloudinary").Get<CloudinarySetting>();
+var cloudinaryAccount = new Account(
+    cloudinarySettings!.CloudName,
+    cloudinarySettings.ApiKey,
+    cloudinarySettings.ApiSecret);
+builder.Services.AddSingleton(new Cloudinary(cloudinaryAccount));
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddPostgreSQL(postgreConnection);
