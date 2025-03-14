@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Login } from "../services/UserService";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,11 +18,11 @@ export default function LoginForm() {
             sessionStorage.setItem("authToken", token);
             const decoded = jwtDecode(token);
             console.log("Thông tin từ token:", decoded);
-
-            alert("Đăng nhập thành công!");
+            toast.success("Đăng nhập thành công");
             navigate("/");
         } catch (error) {
             console.error("Lỗi đăng nhập:", error.response?.data || error.message);
+            toast.error(`Đăng nhập thất bại`);
         }
     };
 
