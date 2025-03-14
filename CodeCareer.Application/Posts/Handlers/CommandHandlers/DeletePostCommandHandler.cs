@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Posts.Handlers
+namespace CodeCareer.Application.Posts.Handlers.CommandHandlers
 {
 
     public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Result>
@@ -22,10 +22,10 @@ namespace CodeCareer.Application.Posts.Handlers
 
         public async Task<Result> Handle(DeletePostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.PostRepository.GetById(new PostId(request.Id));
+            var post = await _unitOfWork.PostRepository.GetById(new Guid(request.Id));
             if (post is null)
                 return Result.FailureResult(Error.NotFound("Post not found"));
-            if(request.RequestBy != post.RecruiterId)
+            if (request.RequestBy != post.RecruiterId)
                 return Result.FailureResult(Error.Unauthorized("You are not authorized to delete this post"));
             try
             {

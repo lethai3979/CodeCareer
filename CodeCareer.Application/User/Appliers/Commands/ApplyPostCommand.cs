@@ -12,6 +12,6 @@ namespace CodeCareer.Application.User.Appliers.Commands
     public sealed record ApplyPostCommand : ICommand<Result>
     {
         public required string UserId { get; set; }
-        public required PostId PostId { get; set; }
+        public required Guid PostId { get; set; }
     }
 }

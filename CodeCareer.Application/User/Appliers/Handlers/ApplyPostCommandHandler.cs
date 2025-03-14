@@ -32,7 +32,7 @@ namespace CodeCareer.Application.User.Appliers.Handlers
             var postDetailLenght = await _unitOfWork.ApplierDetailRepository.GetAll();
             var postDetail = new ApplierDetail
             (
-                new ApplierDetailId(postDetailLenght.Count + 1),
+                Guid.NewGuid(),
                 request.UserId,
                 request.PostId
             );

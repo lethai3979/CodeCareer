@@ -16,7 +16,7 @@ namespace CodeCareer.Application.Mapping
         {
             CreateMap<Recruiter, RecruiterDTO>().ReverseMap();
             CreateMap<Post, PostDTO>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.value));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
         }
     }
 }

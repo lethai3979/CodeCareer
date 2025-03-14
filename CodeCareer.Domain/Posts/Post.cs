@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Posts
 {
-    public class Post :  BaseEntity<PostId>
+    public class Post :  BaseEntity
     {
-        public Post(PostId id,
+        public Post(Guid id,
             string title,
             string description,
             string recruiterId,

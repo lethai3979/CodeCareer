@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Posts.Handlers
+namespace CodeCareer.Application.Posts.Handlers.CommandHandlers
 {
     public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Result>
     {
@@ -22,14 +22,14 @@ namespace CodeCareer.Application.Posts.Handlers
 
         public async Task<Result> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.PostRepository.GetById(new PostId(request.Id));
+            var post = await _unitOfWork.PostRepository.GetById(new Guid(request.Id));
             if (post == null)
                 return Result.FailureResult(Error.NotFound("Post not found"));
             if (post.PublishDate >= request.ExpireDate)
             {
                 return Result.FailureResult(Error.BadRequest("Publish date must be before Expire date."));
             }
-            if(request.RequestUserId != post.RecruiterId)
+            if (request.RequestUserId != post.RecruiterId)
             {
                 return Result.FailureResult(Error.Unauthorized("Unauthorize"));
             }

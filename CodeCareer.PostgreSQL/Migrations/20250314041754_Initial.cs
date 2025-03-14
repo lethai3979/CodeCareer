@@ -165,12 +165,12 @@ namespace CodeCareer.PostgreSQL.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     RecruiterId = table.Column<string>(type: "text", nullable: false),
-                    PublishDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExpireDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PublishDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ExpireDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -188,11 +188,11 @@ namespace CodeCareer.PostgreSQL.Migrations
                 name: "ApplierDetails",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ApplierId = table.Column<string>(type: "text", nullable: false),
-                    PostId = table.Column<int>(type: "integer", nullable: false),
+                    PostId = table.Column<Guid>(type: "uuid", nullable: false),
                     IsApplied = table.Column<bool>(type: "boolean", nullable: false),
-                    AppliedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    AppliedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {

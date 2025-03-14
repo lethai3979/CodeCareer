@@ -12,7 +12,7 @@ namespace CodeCareer.Application.Posts.Commands
 {
     public record UpdatePostCommand : ICommand<Result>
     {
-        public int Id { get; set; }
+        public required string Id { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }
         public required DateTime ExpireDate { get; set; }

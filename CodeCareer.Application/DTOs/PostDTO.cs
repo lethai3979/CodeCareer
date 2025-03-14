@@ -8,7 +8,7 @@ namespace CodeCareer.Application.DTOs
 {
     public sealed class PostDTO
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public RecruiterDTO Recruiter { get; set; } = null!;

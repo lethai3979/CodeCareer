@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeCareer.PostgreSQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250303144141_Initial")]
+    [Migration("20250314041754_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -27,11 +27,12 @@ namespace CodeCareer.PostgreSQL.Migrations
 
             modelBuilder.Entity("CodeCareer.ApplierDetails.ApplierDetail", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("AppliedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ApplierId")
                         .IsRequired()
@@ -40,8 +41,8 @@ namespace CodeCareer.PostgreSQL.Migrations
                     b.Property<bool>("IsApplied")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -54,21 +55,22 @@ namespace CodeCareer.PostgreSQL.Migrations
 
             modelBuilder.Entity("CodeCareer.Posts.Post", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("ExpireDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("PublishDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("RecruiterId")
                         .IsRequired()

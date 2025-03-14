@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Posts.Handlers
+namespace CodeCareer.Application.Posts.Handlers.CommandHandlers
 {
     public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, Result>
     {
@@ -24,7 +24,7 @@ namespace CodeCareer.Application.Posts.Handlers
             try
             {
                 var lengthPost = await _unitOfWork.PostRepository.GetAll();
-                var post = new Post(new PostId(lengthPost.Count + 1), request.Title, request.Description, request.RecruiterId, request.ExpireDate);
+                var post = new Post(Guid.NewGuid(), request.Title, request.Description, request.RecruiterId, request.ExpireDate);
                 await _unitOfWork.PostRepository.Add(post);
                 await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();
@@ -35,6 +35,6 @@ namespace CodeCareer.Application.Posts.Handlers
             }
         }
     }
-    
+
 
 }

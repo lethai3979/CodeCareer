@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import { Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { getAllPosts } from '../../services/PostService';
+import { getAllPersonalPosts } from '../../services/PostService';
 import ModalAddPost from './ModalAddPost';
 import { Link } from 'react-router-dom';
 import ModalEditPost from './ModalEditPost';
@@ -18,7 +18,7 @@ function PersonalPosts() {
     // Hàm gọi API để lấy danh sách bài viết
     const getPosts = async () => {
         try {
-            let res = await getAllPosts();
+            let res = await getAllPersonalPosts();
             if (res && res.data) {
                 setPosts(res.data);
             }

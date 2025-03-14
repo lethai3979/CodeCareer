@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Application.Posts.Queries
 {
-    public sealed record GetPostByIdQuery(string Id) : IQuery<Result>;
+    public sealed record GetAllPostByIdQuery(string Id) : IQuery<Result>;
 }

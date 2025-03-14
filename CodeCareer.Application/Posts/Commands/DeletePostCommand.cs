@@ -12,7 +12,7 @@ namespace CodeCareer.Application.Posts.Commands
 {
     public record DeletePostCommand : ICommand<Result>
     {
-        public int Id { get; set; }
-        public string? RequestBy { get; set; }
+        public string Id { get; set; } = null!;
+        public string RequestBy { get; set; } = string.Empty;
     }
 }

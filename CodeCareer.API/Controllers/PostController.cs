@@ -27,6 +27,15 @@ namespace CodeCareer.API.Controllers
                      .FindFirstValue(ClaimTypes.NameIdentifier) ?? "UnknownUser";
         }
 
+        [HttpGet("GetAllById")]
+        public async Task<IResult> GetAllById()
+        {
+            var request = new GetAllPostByIdQuery(_userId);
+            var result = await _mediator.Send(request);
+            return result.Success ? Results.Ok(result) : result.ToProblemDetails();
+        }
+
+
         [HttpGet("GetAll")]
         public async Task<IResult> GetAll()
         {
@@ -36,7 +45,7 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpGet("GetById/{id}")]
-        public async Task<IResult> GetById(int id)
+        public async Task<IResult> GetById(string id)
         {
             var request = new GetPostByIdQuery(id);
             var result = await _mediator.Send(request);
@@ -59,7 +68,7 @@ namespace CodeCareer.API.Controllers
 
         [HttpPut("Update/{id}")]
         [Authorize(Roles = Role.Recruiter)]
-        public async Task<IResult> Update(int id, [FromBody] UpdatePostCommand command)
+        public async Task<IResult> Update(string id, [FromBody] UpdatePostCommand command)
         {
             if (command.Id != id)
             {
@@ -76,7 +85,7 @@ namespace CodeCareer.API.Controllers
 
         [HttpDelete("Delete/{id}")]
         [Authorize(Roles = Role.Recruiter)]
-        public async Task<IResult> Delete(int id)
+        public async Task<IResult> Delete(string id)
         {
             var command = new DeletePostCommand();
             command.Id = id;

@@ -3,6 +3,9 @@ import axios from "./custom-exios"
 function getAllPosts() {
     return axios.get("/Post/GetAll")
 }
+function getAllPersonalPosts() {
+    return axios.get(`/Post/GetAllById`)
+}
 
 function getPostById(id) {
     return axios.get(`/Post/GetById/${id}`)
@@ -19,4 +22,4 @@ function updatePost(id, title, description, expireDate) {
 function deletePost(id) {
     return axios.delete(`/Post/Delete/${id}`)
 }
-export { getAllPosts, createPost, getPostById, updatePost, deletePost }
+export { getAllPosts, getAllPersonalPosts, createPost, getPostById, updatePost, deletePost}
