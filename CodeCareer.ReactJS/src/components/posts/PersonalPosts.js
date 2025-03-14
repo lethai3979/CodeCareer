@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
@@ -6,27 +5,43 @@ import { getAllPosts } from '../../services/PostService';
 import ModalAddPost from './ModalAddPost';
 import { Link } from 'react-router-dom';
 import ModalEditPost from './ModalEditPost';
+import ModalDeletePost from './ModalDeletePost';
 
 function PersonalPosts() {
     const [posts, setPosts] = useState([]);
-    const [selectedPost, setSelectedPost] = useState();
+    const [selectedPost, setSelectedPost] = useState({});
     const [showModalAddPost, setShowModalAddPost] = useState(false);
     const [showModalEditPost, setShowModalEditPost] = useState(false);
-    const getPosts = async () => {
-        let res = await getAllPosts();
-        if (res && res.data) {
-            setPosts(res.data)
-        }
-    }
+    const [showModalDeletePost, setShowModalDeletePost] = useState(false);
+    const [reload, setReload] = useState(false); // Thêm state để kiểm soát việc gọi lại API
 
+    // Hàm gọi API để lấy danh sách bài viết
+    const getPosts = async () => {
+        try {
+            let res = await getAllPosts();
+            if (res && res.data) {
+                setPosts(res.data);
+            }
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
+
+    // Gọi API khi component mount hoặc khi reload thay đổi
     useEffect(() => {
         getPosts();
-    }, []);
+    }, [reload]);
 
     const handleEditPost = post => {
         setSelectedPost(post);
         setShowModalEditPost(true);
-    }
+    };
+
+    const handleDeletePost = post => {
+        setSelectedPost(post);
+        setShowModalDeletePost(true);
+    };
+
     return (
         <>
             <div>
@@ -35,26 +50,31 @@ function PersonalPosts() {
                     onClick={() => setShowModalAddPost(true)}
                 >
                     Add new post
-
-                </button >
+                </button>
                 <ModalAddPost
                     show={showModalAddPost}
                     handleClose={() => {
-                        setShowModalAddPost(false)
-                        getPosts()
+                        setShowModalAddPost(false);
+                        setReload(prev => !prev); // Kích hoạt reload sau khi đóng modal
                     }}
-                ></ModalAddPost>
-                {selectedPost && (
-                    <ModalEditPost
-                        show={showModalEditPost}
-                        handleClose={() => {
-                            setShowModalEditPost(false)
-                            getPosts()
-                        }}
-                        post={selectedPost}
-                    />
-                )}
-            </div >
+                />
+                <ModalEditPost
+                    show={showModalEditPost}
+                    handleClose={() => {
+                        setShowModalEditPost(false);
+                        setReload(prev => !prev);
+                    }}
+                    post={selectedPost}
+                />
+                <ModalDeletePost
+                    show={showModalDeletePost}
+                    handleClose={() => {
+                        setShowModalDeletePost(false);
+                        setReload(prev => !prev);
+                    }}
+                    postId={selectedPost.id}
+                />
+            </div>
             <div>
                 <Row>
                     {posts.map((p) => (
@@ -72,21 +92,26 @@ function PersonalPosts() {
                                     </div>
                                     <div>
                                         <button
-                                            className="btn btn-success my-3"
+                                            className="btn btn-warning my-3"
                                             onClick={() => handleEditPost(p)}
                                         >
                                             Update
-
-                                        </button >
-
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button
+                                            className="btn btn-danger my-3"
+                                            onClick={() => handleDeletePost(p)}
+                                        >
+                                            Delete
+                                        </button>
                                     </div>
                                 </Card.Body>
                             </Card>
                         </Col>
-                    ))
-                    }
+                    ))}
                 </Row>
-            </div >
+            </div>
         </>
     );
 }

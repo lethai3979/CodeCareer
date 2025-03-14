@@ -44,7 +44,7 @@ namespace CodeCareer.Posts
             }    
             ExpireDate = expireDate;
         }
-        public void Remove()
+        public void SoftDelete()
         {
             IsDeleted = true;
         }

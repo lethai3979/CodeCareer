@@ -1,6 +1,7 @@
 ﻿using CodeCareer.Application.Posts.Commands;
 using CodeCareer.Application.UnitOfWork;
 using CodeCareer.Domain.Shared;
+using CodeCareer.Posts;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,15 @@ namespace CodeCareer.Application.Posts.Handlers
 
         public async Task<Result> Handle(DeletePostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.PostRepository.GetById(request.PostId);
+            var post = await _unitOfWork.PostRepository.GetById(new PostId(request.Id));
             if (post is null)
                 return Result.FailureResult(Error.NotFound("Post not found"));
+            if(request.RequestBy != post.RecruiterId)
+                return Result.FailureResult(Error.Unauthorized("You are not authorized to delete this post"));
             try
             {
-                _unitOfWork.PostRepository.Delete(post);
+                post.SoftDelete();
+                _unitOfWork.PostRepository.Update(post);
                 await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();
             }
