@@ -16,7 +16,7 @@ var postgreConnection = builder.Configuration
 builder.Services.Configure<CloudinarySetting>(
     builder.Configuration.GetSection("Cloudinary"));
 
-// Đăng ký Cloudinary service
+// Add Cloudinary service
 var cloudinarySettings = builder.Configuration.GetSection("Cloudinary").Get<CloudinarySetting>();
 var cloudinaryAccount = new Account(
     cloudinarySettings!.CloudName,
