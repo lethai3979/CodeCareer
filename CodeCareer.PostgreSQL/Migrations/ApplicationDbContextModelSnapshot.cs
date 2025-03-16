@@ -47,7 +47,7 @@ namespace CodeCareer.PostgreSQL.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("ApplierDetails");
+                    b.ToTable("ApplierDetails", (string)null);
                 });
 
             modelBuilder.Entity("CodeCareer.Posts.Post", b =>
@@ -85,7 +85,7 @@ namespace CodeCareer.PostgreSQL.Migrations
 
                     b.HasIndex("RecruiterId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -301,7 +301,7 @@ namespace CodeCareer.PostgreSQL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("AspNetUsers", t =>
+                    b.ToTable("AspNetUsers", null, t =>
                         {
                             t.Property("Description")
                                 .HasColumnName("Applier_Description");

@@ -11,12 +11,23 @@ function getPostById(id) {
     return axios.get(`/Post/GetById/${id}`)
 }
 
-function createPost(title, description, expireDate) {
-    return axios.post("/Post/Create", { title, description, expireDate })
+function createPost(title, description, expireDate, image) {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("expireDate", expireDate);
+    if (image) formData.append("image", image);
+
+    return axios.post("/Post/Create", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 }
 
-function updatePost(id, title, description, expireDate) {
-    return axios.put(`/Post/Update/${id}`, { id, title, description, expireDate })
+
+function updatePost(id, title, description, expireDate,image) {
+    return axios.put(`/Post/Update/${id}`, { id, title, description, expireDate,image })
 }
 
 function deletePost(id) {
