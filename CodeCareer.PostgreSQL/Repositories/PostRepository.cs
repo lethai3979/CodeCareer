@@ -30,7 +30,9 @@ namespace CodeCareer.PostgreSQL.Repository
 
         public async Task<List<Post>> GetAll()
         {
-            return await _context.Posts.Where(p => !p.IsDeleted).OrderBy(p => p.PublishDate).ToListAsync();
+            return await _context.Posts.Include(p => p.Recruiter)
+                                        .Where(p => !p.IsDeleted)
+                                        .OrderBy(p => p.PublishDate).ToListAsync();
         }
 
         public async Task<List<Post>> GetAllById(string id)
@@ -42,7 +44,7 @@ namespace CodeCareer.PostgreSQL.Repository
 
         public async Task<Post?> GetById(Guid id)
         {
-            return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+            return await _context.Posts.Include(p => p.Recruiter).FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
         }
 
         public void Update(Post entity)

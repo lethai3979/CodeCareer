@@ -29,7 +29,7 @@ function ListPost() {
                                 <Card.Body className="d-flex flex-column flex-grow-1">
                                     <Card.Title className="flex-grow-0">{p.title}</Card.Title>
                                     <Card.Text className="flex-grow-1">{p.description}</Card.Text>
-                                    <Card.Text>{p.recruiterUserName}</Card.Text>
+                                    <Card.Text>{p.recruiter?.userName}</Card.Text>
                                     <Card.Text>Ngày đăng: {new Date(p.publishDate).toLocaleDateString('vi-VN')}</Card.Text>
                                     <Card.Text>Ngày kết thúc: {new Date(p.expireDate).toLocaleDateString('vi-VN')}</Card.Text>
                                     <Link className='btn btn-success' to={`/detail-post/${p.id}`}>Chi tiết</Link>
