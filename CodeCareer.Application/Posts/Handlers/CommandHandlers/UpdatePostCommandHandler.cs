@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction.Commands;
+using CodeCareer.Application.Abstraction;
 using CodeCareer.Application.Posts.Commands;
 using CodeCareer.Application.UnitOfWork;
 using CodeCareer.Domain.Shared;
@@ -15,16 +16,20 @@ namespace CodeCareer.Application.Posts.Handlers.CommandHandlers
     public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UpdatePostCommandHandler(IUnitOfWork unitOfWork)
+        private readonly ICloudService _cloudService;
+        public UpdatePostCommandHandler(IUnitOfWork unitOfWork, ICloudService cloudService)
         {
             _unitOfWork = unitOfWork;
+            _cloudService = cloudService;
         }
 
         public async Task<Result> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
             var post = await _unitOfWork.PostRepository.GetById(new Guid(request.Id));
             if (post == null)
+            {
                 return Result.FailureResult(Error.NotFound("Post not found"));
+            }
             if (post.PublishDate >= request.ExpireDate)
             {
                 return Result.FailureResult(Error.BadRequest("Publish date must be before Expire date."));
@@ -35,8 +40,8 @@ namespace CodeCareer.Application.Posts.Handlers.CommandHandlers
             }
             try
             {
-
-                post.Update(request.Title, request.Description, request.ExpireDate);
+                var imageUrl = await _cloudService.UploadImageAsync(request.Image!);
+                post.Update(request.Title, request.Description, request.ExpireDate, imageUrl);
                 _unitOfWork.PostRepository.Update(post);
                 await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();

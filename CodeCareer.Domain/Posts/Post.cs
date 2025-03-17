@@ -38,7 +38,7 @@ namespace CodeCareer.Posts
         public bool IsDeleted { get; private set; }
         public List<ApplierDetail> ApplierDetails { get; private set; } = new List<ApplierDetail>();
 
-        public void Update(string title, string? description, DateTime expireDate)
+        public void Update(string title, string? description, DateTime expireDate, string imageUrl)
         {
             Title = title;
             if(description != null)
@@ -46,6 +46,7 @@ namespace CodeCareer.Posts
                 Description = description;
             }    
             ExpireDate = expireDate;
+            ImageUrl = imageUrl;
         }
         public void SoftDelete()
         {

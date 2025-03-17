@@ -33,7 +33,6 @@ namespace CodeCareer.Application.Posts.Handlers.QueryHandlers
             }
             var postDTO = _mapper.Map<PostDTO>(post);
             return Result<PostDTO>.SuccessResult(postDTO);
-
         }
     }
 }

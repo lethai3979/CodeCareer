@@ -29,6 +29,7 @@ namespace CodeCareer.Application.Posts.Handlers.CommandHandlers
                 var imageString = await _cloudService.UploadImageAsync(request.Image!);
                 var post = new Post(Guid.NewGuid(), request.Title, request.Description, imageString, request.RecruiterId, request.ExpireDate);
                 await _unitOfWork.PostRepository.Add(post);
+                await _unitOfWork.PostRepository.Add(post);
                 await _unitOfWork.SaveChangeAsync();
                 return Result.SuccessResult();
             }

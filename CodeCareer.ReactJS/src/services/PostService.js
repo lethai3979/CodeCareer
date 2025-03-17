@@ -26,8 +26,19 @@ function createPost(title, description, expireDate, image) {
 }
 
 
-function updatePost(id, title, description, expireDate,image) {
-    return axios.put(`/Post/Update/${id}`, { id, title, description, expireDate,image })
+function updatePost(id, title, description, expireDate, image) {
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("expireDate", expireDate);
+    if (image) formData.append("image", image);
+
+    return axios.put(`/Post/Update/${id}`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 }
 
 function deletePost(id) {

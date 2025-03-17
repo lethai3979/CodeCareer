@@ -68,7 +68,7 @@ namespace CodeCareer.API.Controllers
 
         [HttpPut("Update/{id}")]
         [Authorize(Roles = Role.Recruiter)]
-        public async Task<IResult> Update(string id, [FromBody] UpdatePostCommand command)
+        public async Task<IResult> Update(string id, [FromForm] UpdatePostCommand command)
         {
             if (command.Id != id)
             {

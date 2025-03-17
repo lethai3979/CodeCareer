@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap"
+import { Button, Form, Modal, Image } from "react-bootstrap"
 import { updatePost } from "../../services/PostService";
 import { toast } from "react-toastify";
 
@@ -8,6 +8,18 @@ function ModalEditPost(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState("");
+    const [imageFile, setImageFile] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setImageFile(file);
+
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setPreviewImage(imageUrl);
+        }
+    };
     const handleEditPost = async () => {
         try {
             const expireDate = new Date(date + "T00:00:00Z").toISOString();
@@ -15,10 +27,11 @@ function ModalEditPost(props) {
                 id: post.id,
                 title: title,
                 description: description,
-                expireDate: expireDate
+                expireDate: expireDate,
+                imageFile: imageFile
             }
             console.log(editPost)
-            let res = await updatePost(post.id, title, description, expireDate);
+            let res = await updatePost(post.id, title, description, expireDate, imageFile);
             toast.success("cập nhật thành công")
             console.log("Response:", res);
         } catch (error) {
@@ -68,6 +81,22 @@ function ModalEditPost(props) {
                                 onChange={(event) => setDate(event.target.value)}
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicImage">
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                            />
+                        </Form.Group>
+
+                        {/* Hiển thị ảnh preview nếu người dùng chọn ảnh */}
+                        {previewImage && (
+                            <div className="text-center mb-3">
+                                <Image src={previewImage} alt="Preview" fluid thumbnail />
+                            </div>
+                        )}
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

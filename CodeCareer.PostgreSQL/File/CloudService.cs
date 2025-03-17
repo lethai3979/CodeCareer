@@ -24,7 +24,7 @@ namespace CodeCareer.PostgreSQL.File
         {
             if (file == null || file.Length == 0)
             {
-                return _defaultImage;
+                return string.Empty;
             }
 
             await using var stream = file.OpenReadStream();
@@ -35,8 +35,7 @@ namespace CodeCareer.PostgreSQL.File
                 Folder = "CodeCareer",
                 Overwrite = true
             };
-            var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-            
+            var uploadResult = await _cloudinary.UploadAsync(uploadParams);          
             return uploadResult.SecureUrl?.AbsoluteUri ?? _defaultImage;
         }
     }
