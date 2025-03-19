@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Posts.Handlers
+namespace CodeCareer.Application.Posts.Handlers.QueryHandlers
 {
     public class GetAllPostsQueryHandler : IQueryHandler<GetAllPostQuery, Result>
     {

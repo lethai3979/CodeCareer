@@ -1,14 +1,25 @@
-import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap"
+import { useEffect, useState } from "react";
+import { Button, Form, Modal, Image } from "react-bootstrap"
 import { updatePost } from "../../services/PostService";
 import { toast } from "react-toastify";
 
 function ModalEditPost(props) {
-    const { post, show, handleClose } = props;
-    const [title, setTitle] = useState(`${post.title}`);
-    const [description, setDescription] = useState(`${post.description}`);
-    const [date, setDate] = useState(post.expireDate ? new Date(post.expireDate).toLocaleDateString('en-CA') : ""
-    );
+    const { show, handleClose, post } = props;
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [date, setDate] = useState("");
+    const [imageFile, setImageFile] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setImageFile(file);
+
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setPreviewImage(imageUrl);
+        }
+    };
     const handleEditPost = async () => {
         try {
             const expireDate = new Date(date + "T00:00:00Z").toISOString();
@@ -16,10 +27,11 @@ function ModalEditPost(props) {
                 id: post.id,
                 title: title,
                 description: description,
-                date: expireDate
+                expireDate: expireDate,
+                imageFile: imageFile
             }
             console.log(editPost)
-            let res = await updatePost(post.id, title, description, expireDate);
+            let res = await updatePost(post.id, title, description, expireDate, imageFile);
             toast.success("cập nhật thành công")
             console.log("Response:", res);
         } catch (error) {
@@ -29,7 +41,14 @@ function ModalEditPost(props) {
 
         }
     };
+    useEffect(() => {
+        if (show) {
+            setTitle(post.title)
+            setDescription(post.description)
+            setDate(post.expireDate ? new Date(post.expireDate).toLocaleDateString('en-CA') : "")
+        }
 
+    }, [post, show])
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -62,6 +81,22 @@ function ModalEditPost(props) {
                                 onChange={(event) => setDate(event.target.value)}
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicImage">
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                            />
+                        </Form.Group>
+
+                        {/* Hiển thị ảnh preview nếu người dùng chọn ảnh */}
+                        {previewImage && (
+                            <div className="text-center mb-3">
+                                <Image src={previewImage} alt="Preview" fluid thumbnail />
+                            </div>
+                        )}
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

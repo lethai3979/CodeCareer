@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Primitives
 {
-    public abstract class BaseEntity<EntityId> where EntityId : Primitives.EntityId
+    public abstract class BaseEntity
     {
 
-        protected BaseEntity(EntityId id)
+        protected BaseEntity(Guid id)
         {
             this.Id = id;
         }
 
-        public EntityId Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

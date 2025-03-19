@@ -27,6 +27,7 @@ namespace CodeCareer.API.Extensions
                     ErrorType.BadRequest => StatusCodes.Status400BadRequest,
                     ErrorType.NotFound => StatusCodes.Status404NotFound,
                     ErrorType.Conflict => StatusCodes.Status409Conflict,
+                    ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
                     _ => StatusCodes.Status500InternalServerError
                 };
             //Get ErrorType title
@@ -36,6 +37,7 @@ namespace CodeCareer.API.Extensions
                     ErrorType.BadRequest => "Bad Request",
                     ErrorType.NotFound => "Not Found",
                     ErrorType.Conflict => "Conflict",
+                    ErrorType.Unauthorized => "Unauthorized",
                     _ => "Server Failure"
                 };
             #endregion

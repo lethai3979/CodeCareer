@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap"
+import { Button, Form, Modal, Image } from "react-bootstrap";
 import { createPost } from "../../services/PostService";
 import { toast } from "react-toastify";
 
@@ -8,17 +8,29 @@ function ModalAddPost(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState("");
+    const [imageFile, setImageFile] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+
+    // Xử lý chọn ảnh và tạo preview
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setImageFile(file);
+
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setPreviewImage(imageUrl);
+        }
+    };
+
     const handleSaveNewPost = async () => {
         try {
             const expireDate = new Date(date + "T00:00:00Z").toISOString();
-            let res = await createPost(title, description, expireDate);
-            toast.success("Đăng bài thành công")
+            let res = await createPost(title, description, expireDate, imageFile);
+            toast.success("Đăng bài thành công");
             console.log("Response:", res);
         } catch (error) {
-            toast.error("Đăng bài không thành công")
+            toast.error("Đăng bài không thành công");
             console.error("Error creating post:", error);
-            console.error("Request error:", error.message);
-
         }
     };
 
@@ -54,6 +66,21 @@ function ModalAddPost(props) {
                                 onChange={(event) => setDate(event.target.value)}
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicImage">
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                            />
+                        </Form.Group>
+
+                        {/* Hiển thị ảnh preview nếu người dùng chọn ảnh */}
+                        {previewImage && (
+                            <div className="text-center mb-3">
+                                <Image src={previewImage} alt="Preview" fluid thumbnail />
+                            </div>
+                        )}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -69,4 +96,4 @@ function ModalAddPost(props) {
     );
 }
 
-export default ModalAddPost
+export default ModalAddPost;

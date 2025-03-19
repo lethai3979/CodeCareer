@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeCareer.Application.Posts.Handlers
+namespace CodeCareer.Application.Posts.Handlers.QueryHandlers
 {
     public sealed class GetPostByIdQueryHandler : IQueryHandler<GetPostByIdQuery, Result>
     {
@@ -26,14 +26,13 @@ namespace CodeCareer.Application.Posts.Handlers
 
         public async Task<Result> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
         {
-            var post = await _unitOfWork.PostRepository.GetById(new PostId(request.Id));
+            var post = await _unitOfWork.PostRepository.GetById(new Guid(request.Id));
             if (post == null)
             {
                 return Result.FailureResult(Error.NotFound("Post not found"));
             }
             var postDTO = _mapper.Map<PostDTO>(post);
             return Result<PostDTO>.SuccessResult(postDTO);
-
         }
     }
 }

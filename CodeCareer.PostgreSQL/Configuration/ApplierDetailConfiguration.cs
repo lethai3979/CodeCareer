@@ -19,11 +19,6 @@ namespace CodeCareer.PostgreSQL.Configuration
         {
             builder.HasKey(a => a.Id);
 
-            builder.Property(p => p.Id)
-                   .HasConversion(
-                       applierDetailId => applierDetailId.value,
-                       value => new ApplierDetailId(value));
-
 
             builder.HasOne<Post>()
                 .WithMany(p => p.ApplierDetails)

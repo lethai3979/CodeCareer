@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction;
 using CodeCareer.Domain.Shared;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,9 @@ namespace CodeCareer.Application.Posts.Commands
 
     public sealed record CreatePostCommand : ICommand<Result>
     {
-        public required string Title { get; set; } 
+        public required string Title { get; set; }
         public required string Description { get; set; }
+        public IFormFile? Image { get; set; }
         [JsonIgnore]
         public string? RecruiterId { get; set; }
         public required DateTime ExpireDate { get; set; }

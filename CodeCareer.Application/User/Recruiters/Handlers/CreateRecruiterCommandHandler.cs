@@ -14,7 +14,7 @@ namespace CodeCareer.Application.User.Recruiters.Handlers
         {
             _unitOfWork = unitOfWork;
         }
-
+        
         public async Task<Result> Handle(CreateRecruiterCommand request, CancellationToken cancellationToken)
         {
             var transaction = await _unitOfWork.BeginTransactionAsync();

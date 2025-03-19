@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.Posts
 {
-    public class Post :  BaseEntity<PostId>
+    public class Post :  BaseEntity
     {
-        public Post(PostId id,
+        public Post(Guid id,
             string title,
             string description,
+            string imageUrl,
             string recruiterId,
             DateTime expireDate
             ) : base(id)
@@ -21,6 +22,7 @@ namespace CodeCareer.Posts
             Id = id;
             Title = title;
             Description = description;
+            ImageUrl = imageUrl;
             RecruiterId = recruiterId;     
             PublishDate = DateTime.Now;
             ExpireDate = expireDate;
@@ -28,6 +30,7 @@ namespace CodeCareer.Posts
         }
         public string Title { get; private set; }
         public string Description { get; private set; }
+        public string ImageUrl { get; private set; }
         public string RecruiterId { get; private set; }
         public Recruiter Recruiter { get; private set; } = null!;
         public DateTime PublishDate { get; private set; }
@@ -35,7 +38,7 @@ namespace CodeCareer.Posts
         public bool IsDeleted { get; private set; }
         public List<ApplierDetail> ApplierDetails { get; private set; } = new List<ApplierDetail>();
 
-        public void Update(string title, string? description, DateTime expireDate)
+        public void Update(string title, string? description, DateTime expireDate, string imageUrl)
         {
             Title = title;
             if(description != null)
@@ -43,8 +46,9 @@ namespace CodeCareer.Posts
                 Description = description;
             }    
             ExpireDate = expireDate;
+            ImageUrl = imageUrl;
         }
-        public void Remove()
+        public void SoftDelete()
         {
             IsDeleted = true;
         }

@@ -3,6 +3,7 @@ using System;
 using CodeCareer.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeCareer.PostgreSQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250314082308_image-url")]
+    partial class imageurl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace CodeCareer.PostgreSQL.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("ApplierDetails", (string)null);
+                    b.ToTable("ApplierDetails");
                 });
 
             modelBuilder.Entity("CodeCareer.Posts.Post", b =>
@@ -85,7 +88,7 @@ namespace CodeCareer.PostgreSQL.Migrations
 
                     b.HasIndex("RecruiterId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -301,7 +304,7 @@ namespace CodeCareer.PostgreSQL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("AspNetUsers", null, t =>
+                    b.ToTable("AspNetUsers", t =>
                         {
                             t.Property("Description")
                                 .HasColumnName("Applier_Description");

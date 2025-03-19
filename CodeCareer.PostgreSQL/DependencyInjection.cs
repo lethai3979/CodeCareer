@@ -1,15 +1,20 @@
-﻿using CodeCareer.Application.Authentication;
+﻿using CloudinaryDotNet;
+using CodeCareer.Application.Abstraction;
+using CodeCareer.Application.Authentication;
 using CodeCareer.Application.UnitOfWork;
 using CodeCareer.Domain.Interfaces;
 using CodeCareer.PostgreSQL.Authentication;
+using CodeCareer.PostgreSQL.File;
 using CodeCareer.PostgreSQL.Repository;
 using CodeCareer.PostgreSQL.UnitOfWorks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +32,7 @@ namespace CodeCareer.PostgreSQL
             services.AddScoped<IApplierDetailRepository, ApplierDetailRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IJWTProvider, JWTProvider>();
+            services.AddScoped<ICloudService, CloudService>();
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = true;

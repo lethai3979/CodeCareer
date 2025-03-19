@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CodeCareer.ApplierDetails
 {
-    public class ApplierDetail : BaseEntity<ApplierDetailId>
+    public class ApplierDetail : BaseEntity
     {
-        public ApplierDetail(ApplierDetailId id, string applierId, PostId postId)
+        public ApplierDetail(Guid id, string applierId, Guid postId)
             : base(id)
         {
             Id = id;
@@ -19,7 +19,7 @@ namespace CodeCareer.ApplierDetails
         }
 
         public string ApplierId { get; private set; }
-        public PostId PostId { get; private set; }
+        public Guid PostId { get; private set; }
 
         public bool IsApplied { get; private set; }
 

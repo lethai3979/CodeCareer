@@ -16,5 +16,14 @@ instance.interceptors.response.use(function (response) {
     // Do something with response error
     return Promise.reject(error);
 });
-
+instance.interceptors.request.use(
+    (config) => {
+        const token = sessionStorage.getItem("authToken");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 export default instance;

@@ -16,11 +16,6 @@ namespace CodeCareer.PostgreSQL.Configuration
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Id)
-                   .HasConversion(
-                       postId => postId.value,
-                       value => new PostId(value));
-
             builder.HasOne(p => p.Recruiter)
                 .WithMany(r => r.Posts)
                 .HasForeignKey(p => p.RecruiterId)

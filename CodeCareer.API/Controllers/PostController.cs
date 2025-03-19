@@ -27,6 +27,15 @@ namespace CodeCareer.API.Controllers
                      .FindFirstValue(ClaimTypes.NameIdentifier) ?? "UnknownUser";
         }
 
+        [HttpGet("GetAllById")]
+        public async Task<IResult> GetAllById()
+        {
+            var request = new GetAllPostByIdQuery(_userId);
+            var result = await _mediator.Send(request);
+            return result.Success ? Results.Ok(result) : result.ToProblemDetails();
+        }
+
+
         [HttpGet("GetAll")]
         public async Task<IResult> GetAll()
         {
@@ -36,7 +45,7 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpGet("GetById/{id}")]
-        public async Task<IResult> GetById(int id)
+        public async Task<IResult> GetById(string id)
         {
             var request = new GetPostByIdQuery(id);
             var result = await _mediator.Send(request);
@@ -45,10 +54,10 @@ namespace CodeCareer.API.Controllers
 
 
         [HttpPost("Create")]
-        //[Authorize(Roles = Role.Recruiter)]
-        public async Task<IResult> Create([FromBody] CreatePostCommand command)
+        [Authorize(Roles = Role.Recruiter)]
+        public async Task<IResult> Create([FromForm] CreatePostCommand command)
         {
-            command.RecruiterId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            command.RecruiterId = _userId;
             var results = await _mediator.Send(command);
             if (results.Success)
             {
@@ -58,13 +67,29 @@ namespace CodeCareer.API.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public async Task<IResult> Update(int id, [FromBody] UpdatePostCommand command)
+        [Authorize(Roles = Role.Recruiter)]
+        public async Task<IResult> Update(string id, [FromForm] UpdatePostCommand command)
         {
-            if(command.Id != id)
+            if (command.Id != id)
             {
                 return Results.BadRequest("PostId in the body does not match the PostId in the URL");
             }
-            command.RequestUserId = "e9b3ac0f-d114-4dd9-8457-25a0eede77a3";//hardcoded for now
+            command.RequestUserId = _userId;
+            var results = await _mediator.Send(command);
+            if (results.Success)
+            {
+                return Results.Ok();
+            }
+            return results.ToProblemDetails();
+        }
+
+        [HttpDelete("Delete/{id}")]
+        [Authorize(Roles = Role.Recruiter)]
+        public async Task<IResult> Delete(string id)
+        {
+            var command = new DeletePostCommand();
+            command.Id = id;
+            command.RequestBy = _userId;
             var results = await _mediator.Send(command);
             if (results.Success)
             {
